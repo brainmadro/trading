@@ -1,21 +1,37 @@
 export default class Crypto {
+  // Fetches a list of cryptocurrencies from the API
   async fetchStock() {
     try {
+      // Make an API call to get the top 100 cryptocurrencies
       const response = await fetch(
         `https://api.coinlore.net/api/tickers/?limit=100`
       )
+      
+      // Check if the response is successful
       if (!response.ok) throw new Error("Failed to fetch news")
+      
+      // Parse the JSON response
       const data = await response.json()
+      
+      // Return the data of cryptocurrencies
       return data.data
     } catch (error) {
+      // Log any errors to the console
       console.error("Error fetching news:", error)
+      
+      // Return an empty array in case of an error
       return []
     }
   }
+
+  // Renders the list of stocks on the web page
   renderStocks(selector, stockList) {
+    // Get the container element where the stock data will be inserted
     const container = document.querySelector(selector)
+    
+    // Generate HTML content for the first 6 stocks and insert it into the container
     container.innerHTML = stockList
-      .slice(0, 6)
+      .slice(0, 6) // Select the first 6 stocks
       .map(
         (crypto) => `
 				<div class='news-item'>
@@ -25,43 +41,6 @@ export default class Crypto {
 				</div>
 		`
       )
-      .join("")
+      .join("") // Combine all the individual HTML strings into one string
   }
 }
-/* 
-Object = $1
-
-csupply: "649433438.00"
-
-id: "46968"
-
-market_cap_usd: "647331295.74"
-
-msupply: ""
-
-name: "Frax"
-
-nameid: "frax"
-
-percent_change_1h: "0.03"
-
-percent_change_7d: "0.27"
-
-percent_change_24h: "0.11"
-
-price_btc: "0.000010"
-
-price_usd: "0.996763"
-
-rank: 101
-
-symbol: "FRAX"
-
-tsupply: "1044853133.2588"
-
-volume24: 2642071.302989726
-
-volume24a: 1312788.1407490727
-
-Object prototipo
- */
