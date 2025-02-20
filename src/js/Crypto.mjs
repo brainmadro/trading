@@ -2,9 +2,9 @@ export default class Crypto {
   // Fetches a list of cryptocurrencies from the API
   async fetchStock() {
     try {
-      // Make an API call to get the top 100 cryptocurrencies
+      // Make an API call to get the top 6 cryptocurrencies
       const response = await fetch(
-        `https://api.coinlore.net/api/tickers/?limit=100`
+        `https://api.coinlore.net/api/tickers/?limit=6`
       )
       
       // Check if the response is successful
@@ -16,7 +16,6 @@ export default class Crypto {
       // Return the data of cryptocurrencies
       return data.data
     } catch (error) {
-      // Log any errors to the console
       console.error("Error fetching news:", error)
       
       // Return an empty array in case of an error
@@ -31,7 +30,6 @@ export default class Crypto {
     
     // Generate HTML content for the first 6 stocks and insert it into the container
     container.innerHTML = stockList
-      .slice(0, 6) // Select the first 6 stocks
       .map(
         (crypto) => `
 				<div class='news-item'>
@@ -41,6 +39,6 @@ export default class Crypto {
 				</div>
 		`
       )
-      .join("") // Combine all the individual HTML strings into one string
+      .join("")
   }
 }

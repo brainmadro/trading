@@ -32,7 +32,6 @@ export default class CryptoDetails {
       // Return the JSON response
       return await response.json()
     } catch (error) {
-      // Log any errors to the console
       console.error("Error fetching news:", error)
       
       // Return an empty object in case of an error
